@@ -10,6 +10,7 @@
         $scope.addBook = addBook;
         $scope.editBook = editBook;
         $scope.deleteBook = deleteBook;
+        $scope.dataLoaded = false;
         $scope.gridOptions = {
             paginationPageSize: 25, // page size, defaults to the first item in paginationPageSizes
             paginationPageSizes: [15, 25, 50, 100], // array of page sizes
@@ -39,8 +40,8 @@
                 }, {
                    field: 'Actions',
                    displayName: 'Actions',
-                   cellTemplate: '<div class="button-padding"><button ng-click="grid.appScope.editBook(row)">Edit</button>'+
-                                '<button ng-click="grid.appScope.deleteBook(row)">Delete</button></div>'
+                   cellTemplate: '<div class="button-padding"><button ng-click="grid.appScope.editBook(row.entity)">Edit</button>'+
+                                '<button ng-click="grid.appScope.deleteBook(row.entity)">Delete</button></div>'
                 }
             ]
         };
@@ -75,10 +76,33 @@
                 templateUrl: 'myAddBookModal.html',
                 backdrop: true,
                 windowClass: 'modal',
+                resolve: {
+                    gridDataLen: function () {
+                        return $scope.gridOptions.data.length
+                    }
+                },
                 controller: //'AddBookModalController'
-                function ($scope, $modalInstance) { //addBookModalController
+                function ($scope, $modalInstance, gridDataLen) { //addBookModalController
                     $log.log('modal loaded');
+                    $scope.book = {};
                     $scope.submit = function () {
+                        $log.log($scope.book);
+                        var reqBody = {
+                            "ID": gridDataLen + 1,
+                            "Title": $scope.book.title,
+                            "Description": $scope.book.description,
+                            "PageCount": $scope.book.pageCount,
+                            "Excerpt": $scope.book.excerpt,
+                            "PublishDate": $scope.book.publishDate
+                          }
+                          
+                          var postBookUrl = 'http://fakerestapi.azurewebsites.net/api/Books';
+            
+                          $http.post(postBookUrl, reqBody).then(function(response) {
+                              $log.log('posted Book', response);
+                          }, function(error) {
+                              $log.log('Book post failed', error);
+                          });
                         $modalInstance.close('book added');
                     }
                     $scope.cancel = function () {
@@ -104,20 +128,22 @@
         }
 
         function initializeGrid() {
+            $scope.dataLoaded = false;
             var req = {
                 method: 'GET',
                 url: 'http://fakerestapi.azurewebsites.net/api/Books',
                 headers: {
-                  'Content-Type': 'application/json'
+                    'Content-Type': 'application/json'
                 }
-               }
-               
-               $http(req).then(function(resp){
+            }
+            
+            $http(req).then(function(resp){
                 // $log.log(resp);
                 $scope.gridOptions.data = resp.data;
-               }, function(error){
-                   $log.log(error);
-               });   
+                $scope.dataLoaded = true;
+                }, function(error){
+                    $log.log(error);
+            });   
         }
         initializeGrid();
     }
