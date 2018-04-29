@@ -1,15 +1,15 @@
 <div class="container">
         <script type="text/ng-template" id="myAddBookModal.html">
             <div class="container">
-                <div class="col-md-6">
+                <div class="col-md-6 book-modal">
                         <div class="modal-header">
-                                <h3>I'm a modal!</h3>
+                                <h3>Enter Book Details:</h3>
                             </div>
                             <form ng-submit="submit()">
                                 <div class="modal-body">
                                 <div class="container">
                                     <label>Title</label>
-                                    <input type="text" ng-model="book.user" required/>
+                                    <input type="text" ng-model="book.user" pattern="[a-zA-Z0-9\s]+" required/>
                                 </div> 
                                 <div class="container">
                                     <label>Description</label>
