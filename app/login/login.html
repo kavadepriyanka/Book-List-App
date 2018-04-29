@@ -1,0 +1,21 @@
+<div class="container">
+    <h4>{{header}}</h4>
+    <form name="form" ng-submit="login()" role="form">
+        <div class="col-md-4">
+            <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" name="username" ng-model="user.username" required>
+                <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" ng-model="user.password" required>
+                <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+            </div>
+            <div class="form-actions">
+                <button type="submit" ng-disabled="form.$invalid || showLogin" class="btn btn-primary" ng-click="login()">Login</button>
+            </div>
+        </div>
+    </form>
+    <!-- <a href="#/books">View Book List</a> -->
+</div>

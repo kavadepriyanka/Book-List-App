@@ -1,0 +1,50 @@
+<div class="container">
+        <script type="text/ng-template" id="myAddBookModal.html">
+            <div class="container">
+                    <div class="modal-header">
+                            <h3>I'm a modal!</h3>
+                        </div>
+                        <form ng-submit="submit()">
+                          <div class="modal-body">
+                            <div class="container">
+                                <label>Title</label>
+                                <input type="text" ng-model="book.user" required/>
+                            </div> 
+                            <div class="container">
+                                <label>Description</label>
+                                <textarea rows="2" cols="25" ng-model="book.description" required></textarea>
+                            </div>
+                            <div class="container">
+                                <label>Publish Date</label>
+                                <input type="date" ng-model="book.publishDate" ng-disabled="true"/> 
+                            </div>
+                            <div class="container">
+                                <label>Excerpt</label>
+                                <textarea rows="2" cols="25" ng-model="book.excerpt" ></textarea>
+                            </div>
+                            <div class="container">
+                                <label>Page Count</label>
+                                <input type="number" ng-model="book.pageCount" required>    
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                              <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                              <input type="submit" class="btn primary-btn" value="Submit" />
+                          </div>
+                        </form>
+            </div>
+          </script>
+    <div class="row">
+        <div>
+            <a href="#/home">Back</a>
+        </div>
+            <div class="button-padding pull-right">
+              <button ng-click="addBook()">Add Book</button>
+            </div>
+          </div>
+    <div class="row">
+    <div class="book-grid">
+        <div ui-grid="gridOptions" ui-grid-pagination ui-grid-auto-resize></div>
+    </div>
+    </div>
+</div>

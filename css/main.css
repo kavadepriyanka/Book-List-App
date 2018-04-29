@@ -1,0 +1,17 @@
+body {
+    padding: 5px;
+}
+
+.book-grid {
+    /* height: 300px; */
+    /* width: 700px; */
+}
+
+.button-padding {
+    /* margin: 5px; */
+    padding: 10px;
+}
+
+.modal {
+    display: block;
+}
