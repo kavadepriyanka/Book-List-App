@@ -22,11 +22,11 @@
         $routeProvider
         .when('/books', {
             controller: 'BookListController',
-            templateUrl: 'bookList/book-list.html'
+            templateUrl: 'app/bookList/book-list.html'
         })
         .when('/login', {
             controller: 'LoginController',
-            templateUrl: 'login/login.html'
+            templateUrl: 'app/login/login.html'
         })
         .otherwise({ redirectTo: '/login' });
     }
