@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({'extended':'true'}));            // parse applica
 app.use(bodyParser.json());                                     // parse application/json
 app.use(methodOverride());
 
-app.get('*', function(req, res) {
+app.get('/', function(req, res) {
     res.sendfile('./public/app/index.html'); // load the single view file (angular will handle the page changes on the front-end)
 });
 
