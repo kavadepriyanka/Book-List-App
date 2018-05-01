@@ -73,7 +73,7 @@
         function addBook() {
             $log.log('in add book');
             $modal.open({
-                templateUrl: 'addBookModal.html',
+                templateUrl: 'app/bookList/addBookModal.html',
                 backdrop: true,
                 windowClass: 'modal',
                 resolve: {
