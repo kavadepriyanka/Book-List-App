@@ -1,21 +1,35 @@
-<div class="modal-header">
-        <h3>I'm a modal!</h3>
-    </div>
-    <form ng-submit="submit()">
-      <div class="modal-body">
-        <label>Title</label>
-        <input type="text" ng-model="book.user" required/> <!-- Only alphanumeric validation-->
-        <label>Description</label>
-        <textarea rows="2" cols="25" ng-model="book.description" required></textarea>
-        <label>Publish Date</label>
-        <input type="date" ng-model="book.publishDate" ng-disabled="true"/> <!-- Show date picker -->
-        <label>Excerpt</label>
-        <textarea rows="2" cols="25" ng-model="book.excerpt" ></textarea>
-        <label>Page Count</label>
-        <input type="number" ng-model="book.pageCount" required>
-      </div>
-      <div class="modal-footer">
-          <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-          <input type="submit" class="btn primary-btn" value="Submit" />
-      </div>
-    </form>
+<div class="container">
+  <div class="col-md-6 book-modal">
+          <div class="modal-header">
+                  <h3>Enter Book Details:</h3>
+              </div>
+              <form ng-submit="submit()">
+                  <div class="modal-body">
+                  <div class="container">
+                      <label>Title</label>
+                      <input type="text" ng-model="book.user" pattern="[a-zA-Z0-9\s]+" required/>
+                  </div> 
+                  <div class="container">
+                      <label>Description</label>
+                      <textarea rows="2" cols="25" ng-model="book.description" required></textarea>
+                  </div>
+                  <div class="container">
+                      <label>Publish Date</label>
+                      <input type="date" ng-model="book.publishDate" ng-disabled="true"/> 
+                  </div>
+                  <div class="container">
+                      <label>Excerpt</label>
+                      <textarea rows="2" cols="25" ng-model="book.excerpt" ></textarea>
+                  </div>
+                  <div class="container">
+                      <label>Page Count</label>
+                      <input type="number" ng-model="book.pageCount" min="0" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" required>    
+                  </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                      <input type="submit" class="btn primary-btn" value="Submit" />
+                  </div>
+              </form>
+  </div>
+</div>

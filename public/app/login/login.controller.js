@@ -9,34 +9,13 @@
 
         $scope.login = login;
         $scope.user = {};
-        $scope.admin = {
-            "username": "jack",
-            "password": "jill"
-        }
+        $scope.admin = {}
+
         $scope.showLogin = false;
 
-        function isValidUser() {
-            var validUser = false;
-            // $http.get('admin.json').then(function(data) {
-            //     $log.log('in success'+data);
-            //     if((data.username === $scope.user.username) && (data.password === $scope.user.password)) {
-            //         validUser = true;
-            //     }
-            //   }, function(error) {
-            //     $log.log('in error '+error);
-            // });
-
-            if(($scope.admin.username === $scope.user.username) && ($scope.admin.password === $scope.user.password)) {
-                validUser = true;
-            }
-
-            return validUser;
-        }
-
         function login() {
-            // $log.log($scope.user);
-
-            if(isValidUser()) {
+            console.log($scope.user, $scope.admin);
+            if($scope.admin.username === $scope.user.username && $scope.admin.password === $scope.user.password) {
                 $location.path('/books');   
             } else {
                 alert('Incorrect Username or password');
@@ -44,5 +23,17 @@
             $scope.user = {};
             $scope.form.$setPristine();
         }
+
+        function onInit() {
+            $http.get('app/login/admin.json').then(function(data) {
+                $log.log('in success'+data);
+                console.log(data);
+                $scope.admin = data.data[0];
+              }, function(error) {
+                $log.log('in error '+error);
+            });
+        }
+
+        onInit();
     }
 })();
